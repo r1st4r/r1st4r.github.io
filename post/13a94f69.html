@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>XSCTF决赛逆向部分wp | r1st4r's Blog</title><meta name="author" content="r1st4r"><meta name="copyright" content="r1st4r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【简单】babyre这道题使用了花指令，比较友好，花指令是没有修改到寄存器的，是一个无用指令直接nop掉 修改后的反编译结果 进入函数中查看一下 是简单的对输入字符串进行处理，然后进行比较，根据代码进行编写脚本即可。如果题目中对数据的处理出现了或（|）操作，一般使用暴力破解，该题使用了暴力破解的方式，不知道是否有其他更好的做法，脚本如下: 12345678910111213141516171819">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSCTF决赛逆向部分wp">
+<meta property="og:url" content="http://example.com/post/13a94f69.html">
+<meta property="og:site_name" content="r1st4r&#39;s Blog">
+<meta property="og:description" content="【简单】babyre这道题使用了花指令，比较友好，花指令是没有修改到寄存器的，是一个无用指令直接nop掉 修改后的反编译结果 进入函数中查看一下 是简单的对输入字符串进行处理，然后进行比较，根据代码进行编写脚本即可。如果题目中对数据的处理出现了或（|）操作，一般使用暴力破解，该题使用了暴力破解的方式，不知道是否有其他更好的做法，脚本如下: 12345678910111213141516171819">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-03-05T05:58:35.000Z">
+<meta property="article:modified_time" content="2023-03-05T06:20:18.631Z">
+<meta property="article:author" content="r1st4r">
+<meta property="article:tag" content="XSCTF逆向wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/post/13a94f69.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'XSCTF决赛逆向部分wp',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-05 14:20:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/archive_banner.png')"><nav id="nav"><span id="blog-info"><a href="/" title="r1st4r's Blog"><span class="site-name">r1st4r's Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">XSCTF决赛逆向部分wp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-03-05T05:58:35.000Z" title="Created 2023-03-05 13:58:35">2023-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-05T06:20:18.631Z" title="Updated 2023-03-05 14:20:18">2023-03-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="XSCTF决赛逆向部分wp"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="【简单】babyre"><a href="#【简单】babyre" class="headerlink" title="【简单】babyre"></a>【简单】babyre</h2><p>这道题使用了花指令，比较友好，花指令是没有修改到寄存器的，是一个无用指令直接nop掉<img src="https://api2.mubu.com/v3/document_image/9abe1c47-f405-4d3b-ac7c-d2a587292044-19730061.jpg" alt="img"></p>
+<p>修改后的反编译结果<img src="https://api2.mubu.com/v3/document_image/71cc177e-d99e-4849-905e-4d096f8a161a-19730061.jpg" alt="img"></p>
+<p>进入函数中查看一下<img src="https://api2.mubu.com/v3/document_image/2a6880c2-bee0-42e8-af97-78f1d77aaa40-19730061.jpg" alt="img"><img src="https://api2.mubu.com/v3/document_image/d8839781-8d33-44c5-98cf-8ce33207889f-19730061.jpg" alt="img"></p>
+<p>是简单的对输入字符串进行处理，然后进行比较，根据代码进行编写脚本即可。<strong>如果题目中对数据的处理出现了或（|）操作，一般使用暴力破解，该题使用了暴力破解的方式，不知道是否有其他更好的做法，脚本如下:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">0x66</span>,<span class="number">0x7</span>,<span class="number">0x2c</span>,<span class="number">0x3b</span>,<span class="number">0x7b</span>,<span class="number">0x19</span>,<span class="number">0x66</span>,<span class="number">0xa1</span>,<span class="number">0x31</span>,<span class="number">0x5a</span>,<span class="number">0x2f</span>,<span class="number">0xfa</span>,<span class="number">0x36</span>,<span class="number">0x5f</span>,<span class="number">0xc6</span>,<span class="number">0xcb</span>,<span class="number">0x5f</span>,<span class="number">0x19</span>,<span class="number">0x66</span>,<span class="number">0xb3</span>,<span class="number">0x33</span>,<span class="number">0x19</span>,<span class="number">0x6e</span>,<span class="number">0x99</span>,<span class="number">0x40</span>,<span class="number">0x16</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">26</span>):</span><br><span class="line">    <span class="keyword">if</span> i &amp; <span class="number">3</span> != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">4</span> == <span class="number">1</span>:</span><br><span class="line">            flag += <span class="built_in">chr</span>(data[i]^<span class="number">0x6b</span>)</span><br><span class="line">        <span class="keyword">elif</span> i % <span class="number">4</span> == <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">ord</span>(<span class="string">&#x27;&#125;&#x27;</span>)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> ((<span class="number">32</span>*j) | (j&gt;&gt;<span class="number">3</span>))%<span class="number">256</span> == data[i]:</span><br><span class="line">                    flag += <span class="built_in">chr</span>(j)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> i % <span class="number">4</span> == <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">ord</span>(<span class="string">&#x27;&#125;&#x27;</span>)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> ((<span class="number">8</span>*j)|(j&gt;&gt;<span class="number">5</span>))%<span class="number">256</span> == data[i]:</span><br><span class="line">                    flag += <span class="built_in">chr</span>(j)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>(data[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p><strong>flag:flag{r3411y_646y_r3v3rs3@}</strong></p>
+<h2 id="【简单】hideandseek"><a href="#【简单】hideandseek" class="headerlink" title="【简单】hideandseek"></a>【简单】hideandseek</h2><p>这道题进来可以看到一个判断函数，在条件满足下会到达decode函数，猜测flag和这个函数有关，点入发现是一个条件分支语句，执行了restore函数，加上一个看着像函数的东西，查看了restore函数，发现是对f这个数组进行操作，下面这个f好像是一个函数，在后来才意识到代码将f这个函数的所有代码全部转为数据，并进行了一定的操作，导致ida反汇编的时候无法将数据转为代码，<strong>后来才知道这是SMC（自修改），即代码进行一定的操作，将代码隐藏起来，在程序进行时，会进行一次解码，变成真正的函数代码</strong>，本题中restore函数就是SMC函数，因此使用**ida的脚本功能就可以将代码恢复回来，脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> idc_bc695 <span class="keyword">import</span> *</span><br><span class="line">addr = <span class="number">0x404060</span></span><br><span class="line">i = <span class="number">178</span></span><br><span class="line">v1 = <span class="number">85</span></span><br><span class="line"><span class="keyword">while</span> i &gt;= <span class="number">0</span>:</span><br><span class="line">    PatchByte((addr+i),Byte(addr+i)^v1)</span><br><span class="line">    v1 = Byte(addr+i)</span><br><span class="line">    i -= <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;done&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>f就是对flag进行处理的真正函数，函数如下：</p>
+<p><img src="C:\Users\admin88\Desktop\image-20221111091536159.png" alt="image-20221111091536159"></p>
+<p>根据函数写出脚本就可以逆出脚本，脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">key = <span class="string">&#x27;c0ffee&#x27;</span></span><br><span class="line">c = [<span class="number">0x5</span>,<span class="number">0x5c</span>,<span class="number">0x7</span>,<span class="number">0x1</span>,<span class="number">0x1e</span>,<span class="number">0x54</span>,<span class="number">0x3c</span>,<span class="number">0x53</span>,<span class="number">0x26</span>,<span class="number">0x8</span>,<span class="number">0x3a</span>,<span class="number">0x8</span>,<span class="number">0x53</span>,<span class="number">0x54</span>,<span class="number">0xf</span>,<span class="number">0</span>,<span class="number">0x1c</span>,<span class="number">0x3a</span>,<span class="number">0xe</span>,<span class="number">0x49</span>,<span class="number">0x53</span>,<span class="number">0x3</span>,<span class="number">0x19</span>,<span class="number">0x3</span>,<span class="number">0x1e</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">25</span>):</span><br><span class="line">  c[i] ^= <span class="built_in">ord</span>(key[i%<span class="number">6</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(c)):</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">chr</span>(c[i]),end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>flag:flag{1_c@n_m0dify_my5e|f}</strong></p>
+<h2 id="【困难】动次打次"><a href="#【困难】动次打次" class="headerlink" title="【困难】动次打次"></a>【困难】动次打次</h2><p>这道题里面使用了Xtea加密算法对函数进行加密，在程序运行的时候会进行解密，还原代码，因此当时试着用动态调试，但是调试失败，后来才知道原来是程序中有一个函数用于判断程序是否在进行调试，如果在调试则直接退出。</p>
+<p><img src="C:\Users\admin88\Desktop\image-20221111092230168.png" alt="image-20221111092230168"></p>
+<p>上述函数中的if判断就是针对调试进行的，在原来的代码中的if语句是<code>if (!result)</code>，上面是经过修改的，修改后动调一下</p>
+<p>在外面的判断函数下断点</p>
+<p><img src="C:\Users\admin88\Desktop\image-20221111092741479.png" alt="image-20221111092741479"></p>
+<p>可以看到flag直接出来了。这道题实际上挺简单，但是当时比赛时完全被Xtea加密混住了，以为是需要进行解密，没有注意到程序中有不允许动调函数的存在。</p>
+<p><strong>flag:flag{E3E3EEEz_Dyn4m1c_d36u991n9}</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">r1st4r</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/post/13a94f69.html">http://example.com/post/13a94f69.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/XSCTF%E9%80%86%E5%90%91wp/">XSCTF逆向wp</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/65b811a0.html" title="安卓逆向"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">安卓逆向</div></div></a></div><div class="next-post pull-right"><a href="/post/4a17b156.html" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">r1st4r</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/r1st4r"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%90%E7%AE%80%E5%8D%95%E3%80%91babyre"><span class="toc-number">1.</span> <span class="toc-text">【简单】babyre</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%90%E7%AE%80%E5%8D%95%E3%80%91hideandseek"><span class="toc-number">2.</span> <span class="toc-text">【简单】hideandseek</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%90%E5%9B%B0%E9%9A%BE%E3%80%91%E5%8A%A8%E6%AC%A1%E6%89%93%E6%AC%A1"><span class="toc-number">3.</span> <span class="toc-text">【困难】动次打次</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/65b811a0.html" title="安卓逆向">安卓逆向</a><time datetime="2023-03-05T06:00:08.000Z" title="Created 2023-03-05 14:00:08">2023-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/13a94f69.html" title="XSCTF决赛逆向部分wp">XSCTF决赛逆向部分wp</a><time datetime="2023-03-05T05:58:35.000Z" title="Created 2023-03-05 13:58:35">2023-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-03-02T08:49:44.744Z" title="Created 2023-03-02 16:49:44">2023-03-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/archive_banner.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By r1st4r</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
