@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>对ChatGPT的研究 | r1st4r's Blog</title><meta name="author" content="r1st4r"><meta name="copyright" content="r1st4r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对ChatGPT模型的研究1. 引言2022年11月30日，OpenAI推出了ChatGPT聊天机器人，旨在通过用户的提示来和人类进行对话。它的交互界面简洁，只有一个输入框，并且ChatGPT支持在同一个语境进行持续地交互。ChatGPT一经推出，便引发巨大的轰动。无论是让它写一首诗，还是编写一个程序的代码，回答人类随机提出的问题，撰写文章等任务，ChatGPT总能作出具有一定参考意义的回答。本文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对ChatGPT的研究">
+<meta property="og:url" content="http://r1st4r.github.io/post/bbc19103.html">
+<meta property="og:site_name" content="r1st4r&#39;s Blog">
+<meta property="og:description" content="对ChatGPT模型的研究1. 引言2022年11月30日，OpenAI推出了ChatGPT聊天机器人，旨在通过用户的提示来和人类进行对话。它的交互界面简洁，只有一个输入框，并且ChatGPT支持在同一个语境进行持续地交互。ChatGPT一经推出，便引发巨大的轰动。无论是让它写一首诗，还是编写一个程序的代码，回答人类随机提出的问题，撰写文章等任务，ChatGPT总能作出具有一定参考意义的回答。本文">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://r1st4r.github.io/img/archive_banner.jpg">
+<meta property="article:published_time" content="2023-04-26T11:27:00.000Z">
+<meta property="article:modified_time" content="2023-04-26T12:04:12.270Z">
+<meta property="article:author" content="r1st4r">
+<meta property="article:tag" content="ChatGPT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://r1st4r.github.io/img/archive_banner.jpg"><link rel="shortcut icon" href="/img/icon.svg"><link rel="canonical" href="http://r1st4r.github.io/post/bbc19103.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '对ChatGPT的研究',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-26 20:04:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/archive_banner.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="r1st4r's Blog"><span class="site-name">r1st4r's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">对ChatGPT的研究</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-04-26T11:27:00.000Z" title="Created 2023-04-26 19:27:00">2023-04-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-04-26T12:04:12.270Z" title="Updated 2023-04-26 20:04:12">2023-04-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="对ChatGPT的研究"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="对ChatGPT模型的研究"><a href="#对ChatGPT模型的研究" class="headerlink" title="对ChatGPT模型的研究"></a>对ChatGPT模型的研究</h2><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>2022年11月30日，OpenAI推出了ChatGPT聊天机器人，旨在通过用户的提示来和人类进行对话。它的交互界面简洁，只有一个输入框，并且ChatGPT支持在同一个语境进行持续地交互。ChatGPT一经推出，便引发巨大的轰动。无论是让它写一首诗，还是编写一个程序的代码，回答人类随机提出的问题，撰写文章等任务，ChatGPT总能作出具有一定参考意义的回答。本文旨在对ChatGPT的原理进行分析，深入浅出地讲解ChatGPT的实现过程。</p>
+<h1 id="2-原理介绍"><a href="#2-原理介绍" class="headerlink" title="2. 原理介绍"></a>2. 原理介绍</h1><p>chatGPT是一种大型语言模型（LLMS）的扩展，LLMS模型能够读取学习大量文本数据，并推断文本中单词间的关系，可以理解为一种完型填空，该模型旨在预测出在给定的单词序列中的空白位置填入一个合适的词。在此之前，首先来分析chatGPT的前身，Generative Pre-training Transformer(GPT)模型。</p>
+<h2 id="2-1．GPT模型原理"><a href="#2-1．GPT模型原理" class="headerlink" title="2.1．GPT模型原理"></a>2.1．GPT模型原理</h2><p>GPT模型是生成式预训练模型，是OpenAI在Transformer架构上提出的模型。首先对Transformer模型进行介绍，之后分别对GPT系列的模型原理进行分析。</p>
+<h3 id="2-1-1-Transformer模型"><a href="#2-1-1-Transformer模型" class="headerlink" title="2.1.1 Transformer模型"></a>2.1.1 Transformer模型</h3><p>Transformer模型是谷歌在2017年提出的，其结构如图1所示。其核心思想是将输入的句子通过Encoder进行编码得到一个向量矩阵，然后将这一个向量矩阵通过Decoder进行解码得到输出。</p>
+<p><img src="/article_img/chatgpt/1.png" alt="image-20230423135652698"></p>
+<p>​															图 1 Transformer的整体结构，左边是Encoder，右边是Decoder</p>
+<p>具体分为三步，第一步是将输入的句子中的每个单词用一个向量进行表示，该向量是根据单词所在的位置向量和单词的特征值向量相加得来，并将得到的单词表示向量组合成一个矩阵。如下图所示。</p>
+<p> <img src="/article_img/chatgpt/2.png" alt="image-20230423135652698"></p>
+<p>​										图 2 Transformer输入处理过程</p>
+<p>第二步，将上面步骤得到的向量矩阵放入Encoder模块中进行编码，对于Transformer架构，Encoders模块中有着6块Encoder编码器进行编码，最终输出一个新的矩阵，该矩阵的维度和输入矩阵一致。</p>
+<p> <img src="/article_img/chatgpt/3.png" alt="image-20230423140045645"></p>
+<p>​										图 3 Encoders编码过程</p>
+<p>第三步，将输出的编码矩阵放入Decoders模块中进行解码，和Encoders一样，Decoders中也有着6块Decoder解码器，Decoder解码的原理是根据输入的编码矩阵以及之前翻译出来的n个单词对当前正在翻译的单词进行预测并且对于之后的单词，Decoder会通过Mask将之后的单词掩盖。</p>
+<p> <img src="/article_img/chatgpt/4.png" alt="image-20230423140324410"></p>
+<p>图 4 Decoders解码过程，每个Decoder的输入为编码矩阵和上一个Decoder的输出</p>
+<p>以上便是Transformer的大致架构。GPT模型是基于该架构进行设计的，不同的是，GPT并没有采用Transformer中的Encoders模块，它只采用了Decoders模块进行单词的预测。对于每一个Decoder解码器，它的输入只有上一个Decoder的输出，没有和Transformer一样的编码矩阵的输入。并且对于之后的单词Decoder也采取了Mask进行掩盖的做法。</p>
+<h3 id="2-1-2-GPT系列模型"><a href="#2-1-2-GPT系列模型" class="headerlink" title="2.1.2 GPT系列模型"></a>2.1.2 GPT系列模型</h3><p>GPT模型系列是OpenAI提出的非常强大的预训练模型，这一系列的模型可以在非常复杂的NLP任务中得到非常出色的结果，并且模型只需要少量的数据就可以完成相应的NLP任务。在ChatGPT之前，GPT模型共更新迭代了三次。不同于传统的NLP模型，GPT在监督学习之前增加了一个无监督学习过程，这种做法很好的解决了如何获取大量已标注的数据的问题。因为NLP模型的监督学习过程需要大量的标注数据进行训练，但是获取高质量的标注数据非常困难。GPT通过无监督学习，在未标注的数据的基础上训练一个生成式的语言模型，再根据具体任务进行微调。</p>
+<p>GPT-1正是基于上述过程进行设计的，GPT-1的无监督学习过程的优化目标如下图所示。公式(1)中的k表示的是上下文窗口的大小，条件概率P是用参数为Θ的神经网络建模生成的，这些参数是用随机梯度下降训练得来的。GPT-1的目的就是要将下列公式尽可能的最大化。</p>
+<p>$$<br>L_1(U)&#x3D;\sum_{i}logP(u_i|u_{i-k},…,u_{i-1};\Theta)<br>$$<br> GPT-1利用了多层的Transformer架构中的Decoder的一个变体，其工作原理如图6所示，每个模块中都是一个多头的注意力机制，根据前面的单词输入进行推断。</p>
+<p><img src="/article_img/chatgpt/5.png" alt="image-20230426184626059"></p>
+<p>图 5 GPT-1transformer的变体原理，transformer模块具体功能在图中没有细化体现（真GPT论文）</p>
+<p>$$<br>h_0&#x3D;UW_e+W_p\<br>h_l&#x3D;transformer_{block(h_{l-1})} \forall i\in[1,n]\<br>P(u)&#x3D;softmax(h_nW^T_e)<br>$$<br>公式中的U代表的是每个词的向量表示，n是层数，We是词嵌入矩阵，Wp是位置嵌入矩阵。  上面就是GPT-1无监督学习的过程，在完成上面的过程之后，GPT-1已经训练出一个初步的语言模型，下一步就是对该模型进行监督学习的微调。  对于每个有标签y的实例都有m个输入token，x1,…xm，每个实例都会输入到上述训练好的模型之中，得到一个最终向量   ，并将这个最终向量放入线性输出层进行预测。在监督学习的阶段中，模型需要完成的目标就是最大化下面的第一条公式，第二条给出了最大化第一条公式的做法，公式中的   是线性输出层的参数。</p>
+<p>$$<br>P(y|x^1,…,x^m)&#x3D;softmx(h^m_lW_y)\<br>L_2(C)&#x3D;\sum_{x,y}logP(y|x^1,…,x^m)<br>$$<br>GPT-1在有监督学习的任务之中较基于LSTM的模型更加稳定，并且随着训练次数的增加，其性能也在不断提升。尽管GPT-1具有优异的表现，但其在未经微调的任务上的泛化能力还是远远不如经过微调的有监督任务。为了提高模型的性能，GPT-2诞生了。  GPT-2的目的旨在训练一个具有更强的泛化能力的词向量模型，GPT-2在结构上并没有进行过多的修改，只是使用了更多网络参数和更大的数据集。GPT-2的学习目标是使用无监督的预训练模型做有监督的任务。对于一个输出序列，可以表示为如下的公式 </p>
+<p>$$<br>p(x)&#x3D;\prod_{i&#x3D;1}^{n}p(S_n|S_1,…,S_{n-1})<br>$$</p>
+<p>该公式表示一系列条件概率的乘积，条件概率代表的意义是根据已知的<code>input&#123;s1,s2,...,sn-1&#125;</code>来预测未知的<code>output&#123;sn-k,...,sk&#125;</code>。对于一个有监督的任务模型可以建模为<code>p(output|input,task&#125;</code>的形式，这一形式和GPT-2输出序列的表示公式非常类似。GPT-2的本质是希望通过无监督训练来完成有监督任务，它的核心思想是利用一个非常大的数据训练集，大到可以让有监督任务都是该数据集的子集，这样就可以实现仅利用无监督学习的训练来完成有监督任务。GPT-2在训练过程中训练了4组不同层数和词向量长度的模型，每次训练的层数和词向量长度相较于上次都有一定增长，并且可以看出对于每次增长，模型的效果是不断在提升的。</p>
+<p> <img src="/article_img/chatgpt/6.png" alt="image-20230426190320680"></p>
+<p>​										图 6 GPT-2的训练参数</p>
+<p>而GPT-3更是在GPT-2的基础上利用了更加大量的数据集进行训练，GPT-3的特点就是海量数据。GPT-3模型的训练利用了高达45TB的训练数据，模型参数达到了不可置信的1750亿个，但是在如此巨大的数据和参数的训练之下，GPT-3展现了前两代模型所不具有的强大能力。比如撰写人类都难以判别的文章，并且还可以帮助人类进行编写一些简单的SQL和java等代码。</p>
+<p><img src="/article_img/chatgpt/7.png" alt="image-20230426190329568"></p>
+<p>​								图 7 模型参数和准确度的关系图，可见当参数规模上去后，模型的准确度也得到大幅提高</p>
+<p>基于海量的数据以及大量的资金投入，GPT-3在完成常见的NLP任务上具有非常出色的表现，并且在一些非常见的NLP任务上也完成得相当不错。</p>
+<p>总体而言，GPT系列模型基于的框架为无监督学习和有监督微调，在后期模型中趋向于仅依靠无监督学习来完成监督任务。并且在大规模数据的训练下，GPT模型确实展现出了它的高效性。但GPT系列模型仍存在不足。首先GPT模型本身没有辨别数据的能力，对于数据集中的数据如果被恶意注入了一些有毒数据，那么训练出来的模型无法保证它所产生的输出不会包含一些敏感内容和具有偏见的回答。其次，GPT模型无法判断问题是否是具有意义的，对于一些无意义的问题，对于人类而言是完全没有必要回答的，但GPT模型仍会对该问题进行分析，最终给出没有任何意义的回答。</p>
+<h2 id="2-2-ChatGPT原理"><a href="#2-2-ChatGPT原理" class="headerlink" title="2.2 ChatGPT原理"></a>2.2 ChatGPT原理</h2><p>ChatGPT是InstructGPT的衍生产品，针对上述GPT模型具有的问题，ChatGPT引入了一种新的方法来解决数据的问题，那就是让人类参与到模型的训练过程之中，通过人类反馈对数据进行处理，使得模型的输出与用户希望得到的结果更加符合。ChatGPT模型的训练可以分为以下三步，监督微调模型，奖励模型，强化学习。</p>
+<h3 id="2-2-1-监督微调模型"><a href="#2-2-1-监督微调模型" class="headerlink" title="2.2.1 监督微调模型"></a>2.2.1 监督微调模型</h3><p>在这一阶段中，首先需要雇佣40个人的承包商团队来创建一个有监督的数据集，输入数据的来源是通过实际用户输入进行处理得来的，这些输入中还涉及到一些具有争议和敏感的话题，并且针对每个输入都有人员写了一个适当的回答，利用这个有监督的数据集对已有的模型进行微调，除此之外，针对真实样本数量少的提示输入，还需要训练人员创建示例提示输入，将上述提示输出对构成的训练数据集用于监督模型的训练之中。这一阶段训练出了16个epoch，使用余弦学习率衰减，剩余dropout为0.2。最终训练出的SFT模型在1个epoch后对验证损失过拟合，但是这个过拟合所产生的影响是可以忽略的，训练更多的epoch对于模型而言更有好处。</p>
+<p><img src="/article_img/chatgpt/8.png" alt="image-20230426190348523"></p>
+<p>​																							图 8 监督模型训练过程</p>
+<p>如上图所示，每个数据集的样本都会先经过标签者提供一个期望中的回答，并且这个输入输出对作为训练数据放入SFT模型中进行监督学习。</p>
+<h3 id="2-2-2-奖励模型"><a href="#2-2-2-奖励模型" class="headerlink" title="2.2.2 奖励模型"></a>2.2.2 奖励模型</h3><p>在上阶段的模型训练之后，chatGPT对用户的输入可以做出更好的响应，在这一阶段需要做的是训练出一个奖励模型（RM），RM模型的目的是为了让chatGPT对每个输入都能够做出最好的回应。该阶段利用上个阶段训练得到的SFT模型，对每个输入产生4到9个输出，并让人类针对回应结果的好坏进行排序。RM模型是在同一个输入上的两个模型输出之间的比较数据集上训练的，他们使用交叉熵损失，将比较作为标签，最后得到的差异表示人类对于一种响应比另一种响应更加认同。chatGPT则是将自己产生的多个响应进行比较排序来训练这个RM模型。在数据集的设置上，chatGPT将多个输入的所有可能排序作为一个单独的数据点放入数据集中进行训练，这种做法可以防止模型在训练过程中出现过拟合问题，因为这种做法只需要对每个完成RM进行一次向前传递，如果将每个结果都作为一个数据点，则会产生多次前向传递，进而导致模型的过拟合。奖励模型的损失函数如下图所示。</p>
+<p>$$<br>loss(\theta)&#x3D;\frac{1}{C_k^2}E_{(x,y_w,y_l)-D}[log(\sigma(r_{\theta}(x,y_w)-r_{\theta}(x,y_l)))]<br>$$</p>
+<p><img src="/article_img/chatgpt/9.png" alt="image-20230426191054574"></p>
+<p>​																								图 9 奖励模型训练过程</p>
+<p>如上图所示，对于一个输入，模型会给出多个输出，标签者对于上面的多个输出进行一个排序，并将这个结果放入奖励模型中进行训练。</p>
+<h3 id="2-2-3-强化学习"><a href="#2-2-3-强化学习" class="headerlink" title="2.2.3 强化学习"></a>2.2.3 强化学习</h3><p>在强化学习中，利用了PPO对SFT模型进行了微调，对于随机的用户提示输入，他会产生一个响应，并将提示响应对放入奖励模型中产生奖励输出。此外在每个SFT模型的令牌上还添加了一个KL惩罚，以缓解奖励模型的过度优化。强化学习阶段旨在最大化以下组合目标函数</p>
+<p>$$<br>objective(\phi)&#x3D;E_{(x,y)-D_{\phi}^{RL}}[r_{\theta}(x,y)-\beta log(\pi_{\phi}^{RL}(y|x)&#x2F;\pi^{SET}(y|x))]+\\gamma E_x-D_{pertrain}[log(\pi_\phi^{RL})(x)]<br>$$<br><img src="/article_img/chatgpt/10.png" alt="image-20230426191921884"></p>
+<p>​																							图 10 强化学习过程</p>
+<p>如上图所示，对于一个随机的输入，模型产生一个输出，并经由奖励模型获得一个奖励值，该奖励值将会被用于进行策略的更新。</p>
+<p>ChatGPT引入人类反馈方法对模型的微调使得ChatGPT相较于GPT模型具有更好的表现，使得ChatGPT的输出更加符合人们所希望得到的结果；除此之外，ChatGPT在模型上的无害性上比GPT模型效果要有些许提升，因为ChatGPT本身是基于GPT-3衍生的，而GPT-3产生有害输出的概率相对较低，这也使得ChatGPT在无害性的提升上不够突出，但相较于GPT-3还是有一定提升。</p>
+<h1 id="3-新的模型GPT-4"><a href="#3-新的模型GPT-4" class="headerlink" title="3. 新的模型GPT-4"></a>3. 新的模型GPT-4</h1><p>2023年3月14日，OpenAI发布了新的GPT模型，GPT-4。GPT-4在GPT-3的基础上增加了多模态功能，这意味着GPT-4将可以识别图片。事实上GPT-4对于图片的识别具有非常高的精确度。</p>
+<p><img src="/article_img/chatgpt/11.png" alt="image-20230426191951615"></p>
+<p>​																								图 11 GPT-4对图片的识别</p>
+<p>GPT-4成功识别出来三张图片每张图片的含义，第一张图片为插着VGA连接器的智能手机，第二张为Lightning Cable适配器的包装，上面印有VGA连接器的图片，第三张为一个末端有小型闪电连接器的VGA连接器特写。并且GPT-4针对这张图片还做出了图片的幽默在于将过时的VGA连接器插入小型现代智能手机充电端口的荒谬做法的结论。</p>
+<p>更令人惊叹的是，GPT-4对于一张粗略的手绘的草图也能够做到精准识别，并正确理解用户意图。图29是一名用户手绘的网站草图，GPT-4在识别这张图片之后，生成了网站的全部代码，并且网站的风格与手绘的草图基本一致。</p>
+<p><img src="/article_img/chatgpt/12.png" alt="image-20230426192003861"></p>
+<p>​																							图 12 一张手绘的网站图</p>
+<p><img src="/article_img/chatgpt/13.png" alt="image-20230426192015526"></p>
+<p>​																		图 13 GPT-4在识别图29的图片后生成的网站图</p>
+<p>除了GPT-4的多模态能力以外，GPT-4在推理能力方面也有着非常突出的表现。测试者利用人类的考试来测试GPT-4的能力，在考试前测试者没有就考试对GPT-4进行专门的训练，考试中的少数问题在模型的训练中可以看到，图31为GPT-4在考试中的结果。</p>
+<p><img src="/article_img/chatgpt/14.png" alt="image-20230426192026573"></p>
+<p>​																		图 14 GPT-4在人类考试中的结果</p>
+<p>可以看到GPT-4的成绩基本都是非常靠前，每项成绩都优于GPT-3.5，并且在Uniform Bar Exam的测试中获得了前10%的高分。</p>
+<p>除此之外，测试人员针对GPT-4的安全性投入了大量的精力，采用了领域专家进行对抗性测试和红队测试。</p>
+<p><img src="/article_img/chatgpt/15.png" alt="image-20230426192038142"></p>
+<p>​																		图 15 GPT-4早期和最新版本针对不被允许的提示的回答</p>
+<p>在早期版本中，GPT-4针对如何制作炸弹的问题上给出了需要考虑的步骤，但是在最新版本的GPT-4模型中，模型辨别出这是一个不被允许回答的问题，并拒绝回答该问题。具体的测试用例还有很多，但总体上看，最新版本的GPT-4能够判别问题是否是有害的，从而决定是否拒绝回答。可见GPT-4在安全性方面得到了充分的改善。</p>
+<h1 id="4-结语"><a href="#4-结语" class="headerlink" title="4. 结语"></a>4. 结语</h1><p>ChatGPT作为当下人们最为关注的人工智能产品，了解它的原理不仅有利于我们加深对人工智能的理解，更能促进更加强于ChatGPT的人工智能产品的诞生。目前ChatGPT的依赖模型已经来到了GPT-4，具有更加强悍的对话和问题处理能力。可能不久的将来GPT-5也将出现替代GPT-4。国内对标ChatGPT也推出了文心一言，尽管目前它的能力仍存在不足，但是人工智能学习的速度远超人类，你不知道明天人工智能模型就发展成什么样子。说不定一段时间过后，文心一言真的能够对标ChatGPT。但无论是文心一言还是ChatGPT，它们的诞生都是为了促进人类社会的发展和进步。而学习它们的原理是为了让我们更好地发挥人工智能这个领域的优点并加以造福社会。</p>
+<p><strong>参考资料</strong></p>
+<p>[1] Tom B.Brown,Benjamin,Mann,Nick,Ryder,Melanie,Subbiah.Language Models are Few-Shot Learners[R],OpenAI, arXiv:2005.14165v4 [cs.CL] 22 Jul 2020</p>
+<p>[2] Alec Radford, Karthik Narasimhan, Tim Salimans, Ilya Sutskever.Improving Language Understanding by Generative Pre-Training[R],OpenAI</p>
+<p>[3] OpenAI.OpenAI(2023), arXiv:2303.08774v3 [cs.CL] 27 Mar 2023</p>
+<p>[4] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350017443">预训练语言模型之GPT-1，GPT-2和GPT-3</a></p>
+<p>[5]  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338817680">Transformer模型详解(图解最完整版) </a></p>
+<p>[6] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7204633786934951993#heading-6">人人都看得懂的ChatGPT 技术原理解析</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://r1st4r.github.io">r1st4r</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://r1st4r.github.io/post/bbc19103.html">http://r1st4r.github.io/post/bbc19103.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ChatGPT/">ChatGPT</a></div><div class="post_share"><div class="social-share" data-image="/img/archive_banner.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/5076a3eb.html" title="NSSCTF wordy"><img class="cover" src="/img/archive_banner.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">NSSCTF wordy</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">r1st4r</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/r1st4r"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9ChatGPT%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="toc-number">1.</span> <span class="toc-text">对ChatGPT模型的研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%95%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">1. 引言</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="toc-number"></span> <span class="toc-text">2. 原理介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%EF%BC%8EGPT%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">2.1．GPT模型原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-Transformer%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">2.1.1 Transformer模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-GPT%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.1.2 GPT系列模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-ChatGPT%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2.2 ChatGPT原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E7%9B%91%E7%9D%A3%E5%BE%AE%E8%B0%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">2.2.1 监督微调模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.2 奖励模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.3.</span> <span class="toc-text">2.2.3 强化学习</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%96%B0%E7%9A%84%E6%A8%A1%E5%9E%8BGPT-4"><span class="toc-number"></span> <span class="toc-text">3. 新的模型GPT-4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%BB%93%E8%AF%AD"><span class="toc-number"></span> <span class="toc-text">4. 结语</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/bbc19103.html" title="对ChatGPT的研究"><img src="/img/archive_banner.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="对ChatGPT的研究"/></a><div class="content"><a class="title" href="/post/bbc19103.html" title="对ChatGPT的研究">对ChatGPT的研究</a><time datetime="2023-04-26T11:27:00.000Z" title="Created 2023-04-26 19:27:00">2023-04-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/5076a3eb.html" title="NSSCTF wordy"><img src="/img/archive_banner.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NSSCTF wordy"/></a><div class="content"><a class="title" href="/post/5076a3eb.html" title="NSSCTF wordy">NSSCTF wordy</a><time datetime="2023-03-07T15:52:42.000Z" title="Created 2023-03-07 23:52:42">2023-03-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/65b811a0.html" title="安卓逆向"><img src="/img/archive_banner.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安卓逆向"/></a><div class="content"><a class="title" href="/post/65b811a0.html" title="安卓逆向">安卓逆向</a><time datetime="2023-03-05T06:00:08.000Z" title="Created 2023-03-05 14:00:08">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/13a94f69.html" title="XSCTF决赛逆向部分wp"><img src="/img/archive_banner.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XSCTF决赛逆向部分wp"/></a><div class="content"><a class="title" href="/post/13a94f69.html" title="XSCTF决赛逆向部分wp">XSCTF决赛逆向部分wp</a><time datetime="2023-03-05T05:58:35.000Z" title="Created 2023-03-05 13:58:35">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/4a17b156.html" title="Hello World"><img src="/img/archive_banner.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/post/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-03-02T08:49:44.744Z" title="Created 2023-03-02 16:49:44">2023-03-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/archive_banner.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By r1st4r</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
